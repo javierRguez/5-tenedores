@@ -30,7 +30,7 @@ export default class Login extends Component {
   }
   login = () => {
     const validate = this.refs.loginForm.getValue();
-    console.log(validate);
+
     if (!validate) {
       this.setState({ formErrorMessage: "Formulario incorrecto" });
     } else {
@@ -39,11 +39,12 @@ export default class Login extends Component {
         .auth()
         .signInWithEmailAndPassword(validate.email, validate.password)
         .then(result => {
-          this.refs.toast.show("Login correcto", 200, () => {
+          this.refs.toastLogin.show("Login correcto", 200, () => {
             this.props.navigation.goBack();
           });
         })
         .catch(err => {
+          console.error(err);
           this.refs.toastLogin.show("Login incorrecto, revise sus datos", 2500);
         });
     }
@@ -103,6 +104,17 @@ export default class Login extends Component {
             title="Login"
             onPress={() => this.login()}
           />
+          <Text style={styles.textRegister}>
+            ¿Aún no tienes una cuenta?{" "}
+            <Text
+              style={styles.btnRegister}
+              onPress={() => {
+                this.props.navigation.navigate("Register");
+              }}
+            >
+              Regístrate
+            </Text>
+          </Text>
           <Text style={styles.formErrorMessage}>{formErrorMessage}</Text>
           <Divider style={styles.divider} />
           <SocialIcon
@@ -129,8 +141,8 @@ const styles = StyleSheet.create({
   viewBody: {
     flex: 1,
 
-    marginLeft: 40,
-    marginRight: 40,
+    marginLeft: 30,
+    marginRight: 30,
     marginTop: 40
   },
   viewForm: {
@@ -152,10 +164,20 @@ const styles = StyleSheet.create({
   formErrorMessage: {
     color: "#f00",
     textAlign: "center",
-    marginTop: 30
+    marginTop: 10,
+    marginBottom: 10
   },
   divider: {
     backgroundColor: "blue",
-    marginBottom: 10
+    marginBottom: 20
+  },
+  textRegister: {
+    marginTop: 15,
+    marginLeft: 10,
+    marginRight: 10
+  },
+  btnRegister: {
+    color: "#00a680",
+    fontWeight: "bold"
   }
 });

@@ -2,8 +2,10 @@ import React, { Component } from "react";
 import { StyleSheet, View, Text } from "react-native";
 import { Button } from "react-native-elements";
 import * as firebase from "firebase";
+import MyAccountGuest from "../../components/MyAccount/MyAccountGuest";
+import MyAccountUser from "../../components/MyAccount/MyAccountUser";
 
-export default class MyAcount extends Component {
+export default class MyAccount extends Component {
   constructor() {
     super();
     this.state = {
@@ -31,22 +33,9 @@ export default class MyAcount extends Component {
   render() {
     const { login } = this.state;
     if (login) {
-      return (
-        <View style={styles.viewBody}>
-          <Button title="Cerrar Sesión" onPress={() => this.logout()} />
-        </View>
-      );
+      return <MyAccountUser goToScreen={this.goToScreen} />;
     } else {
-      return (
-        <View style={styles.viewBody}>
-          <Text>Hola MyAcount</Text>
-          <Button
-            title="Registro"
-            onPress={() => this.goToScreen("Register")}
-          />
-          <Button title="Login" onPress={() => this.goToScreen("Login")} />
-        </View>
-      );
+      return <MyAccountGuest goToScreen={this.goToScreen} />;
     }
   }
 }
