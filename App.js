@@ -1,7 +1,8 @@
 import React from 'react'
 import Navigation from './app/navigation/Navigation'
-import firebaseApp from './app/utils/firebase'
+import InitializeFirebase from './app/utils/firebase'
 
 export default function App() {
+  InitializeFirebase()
   return <Navigation />
 }

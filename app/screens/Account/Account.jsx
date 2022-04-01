@@ -1,8 +1,8 @@
-import { View, Text } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import { getAuth, onAuthStateChanged } from 'firebase/auth'
 import UserGuest from './UserGuest'
 import UserLogged from './UserLogged'
+import Loading from '../../components/Loading'
 
 export default function Account() {
   const [login, setLogin] = useState(null)
@@ -10,12 +10,15 @@ export default function Account() {
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
-      if (user) setLogin(false)
-      setLogin(true)
+      if (!user) {
+        setLogin(false)
+      } else {
+        setLogin(true)
+      }
     })
   }, [])
 
-  if (login === null) return <Text>Cargando...</Text>
+  if (login === null) return <Loading isVisible text="Cargando.." />
 
   return login ? <UserLogged /> : <UserGuest />
 }
