@@ -1,5 +1,5 @@
 import { StyleSheet, View, Image } from 'react-native'
-import  { useRef } from 'react'
+import { useRef } from 'react'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import Toast from 'react-native-easy-toast'
 import RegisterForm from '../../components/Account/RegisterForm'
@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
   },
 })
 
-export default function Register() {
+export function RegisterScreen() {
   const toastRef = useRef()
   return (
     <KeyboardAwareScrollView>

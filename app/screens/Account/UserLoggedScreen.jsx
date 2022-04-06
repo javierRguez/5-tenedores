@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
   },
 })
 
-export default function UserLogged() {
+export function UserLoggedScreen() {
   const [userInfo, setUserInfo] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
   const [loadingText, setLoadingText] = useState('')

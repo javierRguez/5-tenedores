@@ -1,10 +1,9 @@
 import { View, Text } from 'react-native'
 
-
-export default function TopRestaurants() {
+export function FavoritesScreen() {
   return (
     <View>
-      <Text>TopRestaurants</Text>
+      <Text>Favorites</Text>
     </View>
   )
 }

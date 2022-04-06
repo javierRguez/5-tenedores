@@ -1,30 +1,31 @@
 import { NavigationContainer } from '@react-navigation/native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { Icon } from 'react-native-elements'
-import RestaurantsStack from './RestaurantsStack'
-import FavoritesStack from './FavoritesStack'
-import TopRestaurantsStack from './TopRestaurantsStack'
-import SearchStack from './SearchStack'
-import AccountStack from './AccountStack'
+import { RestaurantsStack } from './RestaurantsStack'
+import { FavoritesStack } from './FavoritesStack'
+import { RankingStack } from './RankingStack'
+import { SearchStack } from './SearchStack'
+import { AccountStack } from './AccountStack'
+import { screen } from './screenName'
 
 const Tab = createBottomTabNavigator()
 
 function screenOptions(route, color) {
   let iconName
   switch (route.name) {
-    case 'restaurant-stack':
+    case screen.restaurant.tab:
       iconName = 'compass-outline'
       break
-    case 'favorites-stack':
+    case screen.favorites.tab:
       iconName = 'heart-outline'
       break
-    case 'top-restaurants-stack':
+    case screen.ranking.tab:
       iconName = 'star-outline'
       break
-    case 'search-stack':
+    case screen.search.tab:
       iconName = 'magnify'
       break
-    case 'account-stack':
+    case screen.account.tab:
       iconName = 'home-outline'
       break
 
@@ -49,27 +50,27 @@ export default function Navigation() {
         })}
       >
         <Tab.Screen
-          name="restaurant-stack"
+          name={screen.restaurant.tab}
           component={RestaurantsStack}
           options={{ title: 'Restaurantes' }}
         />
         <Tab.Screen
-          name="favorites-stack"
+          name={screen.favorites.tab}
           component={FavoritesStack}
           options={{ title: 'Favoritos' }}
         />
         <Tab.Screen
-          name="top-restaurants-stack"
-          component={TopRestaurantsStack}
-          options={{ title: 'Top 5' }}
+          name={screen.ranking.tab}
+          component={RankingStack}
+          options={{ title: 'Ranking' }}
         />
         <Tab.Screen
-          name="search-stack"
+          name={screen.search.tab}
           component={SearchStack}
-          options={{ title: 'Buscador' }}
+          options={{ title: 'Buscar' }}
         />
         <Tab.Screen
-          name="account-stack"
+          name={screen.account.tab}
           component={AccountStack}
           options={{ title: 'Cuenta' }}
         />

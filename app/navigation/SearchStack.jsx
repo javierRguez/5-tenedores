@@ -1,14 +1,15 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import Search from '../screens/Search'
+import { SearchScreen } from '../screens/SearchScreen'
+import { screen } from './screenName'
 
 const Stack = createNativeStackNavigator()
 
-export default function SearchStack() {
+export function SearchStack() {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name="search"
-        component={Search}
+        name={screen.search.search}
+        component={SearchScreen}
         options={{ title: 'Buscador' }}
       />
     </Stack.Navigator>

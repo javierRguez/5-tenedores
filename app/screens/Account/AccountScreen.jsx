@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react'
 import { getAuth, onAuthStateChanged } from 'firebase/auth'
-import { LoadingModal } from 'components'
-import UserGuest from './UserGuest'
-import UserLogged from './UserLogged'
+import { LoadingModal } from '../../components'
+import { UserGuestScreen } from './UserGuestScreen'
+import { UserLoggedScreen } from './UserLoggedScreen'
 
-export default function Account() {
+export function AccountScreen() {
   const [hasLogged, setHasLogged] = useState(null)
   const auth = getAuth()
 
@@ -16,5 +16,5 @@ export default function Account() {
 
   if (hasLogged === null) return <LoadingModal isVisible text="Cargando.." />
 
-  return hasLogged ? <UserLogged /> : <UserGuest />
+  return hasLogged ? <UserLoggedScreen /> : <UserGuestScreen />
 }

@@ -1,27 +1,28 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import Account from '../screens/Account/Account'
-import Login from '../screens/Account/Login'
-import Register from '../screens/Account/Register'
+import { AccountScreen } from '../screens/Account/AccountScreen'
+import { LoginScreen } from '../screens/Account/LoginScreen'
+import { RegisterScreen } from '../screens/Account/RegisterScreen'
+import { screen } from './screenName'
 
 const Stack = createNativeStackNavigator()
 
-export default function AccountStack() {
+export function AccountStack() {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name="account"
-        component={Account}
-        options={{ title: 'Mi Cuenta' }}
+        name={screen.account.account}
+        component={AccountScreen}
+        options={{ title: 'Cuenta' }}
       />
       <Stack.Screen
-        name="login"
-        component={Login}
-        options={{ title: 'Iniciar Sesión' }}
+        name={screen.account.login}
+        component={LoginScreen}
+        options={{ title: 'Iniciar sesión' }}
       />
       <Stack.Screen
-        name="register"
-        component={Register}
-        options={{ title: 'Registro' }}
+        name={screen.account.register}
+        component={RegisterScreen}
+        options={{ title: 'Crea tu cuenta' }}
       />
     </Stack.Navigator>
   )

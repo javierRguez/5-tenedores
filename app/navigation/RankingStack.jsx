@@ -1,16 +1,16 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import { RestaurantsScreen } from '../screens/RestaurantsScreen'
+import { RankingScreen } from '../screens/RankingScreen'
 import { screen } from './screenName'
 
 const Stack = createNativeStackNavigator()
 
-export function RestaurantsStack() {
+export function RankingStack() {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name={screen.restaurant.restaurants}
-        component={RestaurantsScreen}
-        options={{ title: 'Restaurantes' }}
+        name={screen.ranking.ranking}
+        component={RankingScreen}
+        options={{ title: 'Ranking' }}
       />
     </Stack.Navigator>
   )

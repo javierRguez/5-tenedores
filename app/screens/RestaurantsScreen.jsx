@@ -1,10 +1,9 @@
 import { View, Text } from 'react-native'
 
-
-export default function Search() {
+export function RestaurantsScreen() {
   return (
     <View>
-      <Text>Search</Text>
+      <Text>Restaurants</Text>
     </View>
   )
 }

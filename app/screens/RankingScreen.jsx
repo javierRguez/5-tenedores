@@ -1,9 +1,9 @@
 import { View, Text } from 'react-native'
 
-export default function Restaurants() {
+export function RankingScreen() {
   return (
     <View>
-      <Text>Restaurants</Text>
+      <Text>TopRestaurants</Text>
     </View>
   )
 }

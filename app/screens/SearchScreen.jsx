@@ -1,9 +1,9 @@
 import { View, Text } from 'react-native'
 
-export default function Favorites() {
+export function SearchScreen() {
   return (
     <View>
-      <Text>Favorites</Text>
+      <Text>Screen</Text>
     </View>
   )
 }
