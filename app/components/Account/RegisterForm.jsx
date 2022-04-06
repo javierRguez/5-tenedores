@@ -1,13 +1,11 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable no-console */
 import { StyleSheet, View } from 'react-native'
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { Input, Icon, Button } from 'react-native-elements'
 import { size, isEmpty } from 'lodash'
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth'
 import { useNavigation } from '@react-navigation/native'
 import { validateEmail } from '../../utils/validations'
-import Loading from '../Loading'
+import { LoadingModal } from '..'
 
 const styles = StyleSheet.create({
   formContainer: {
@@ -63,7 +61,7 @@ export default function RegisterForm({ toastRef }) {
     } else {
       setIsLoading(true)
       createUserWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
+        .then((/* userCredential */) => {
           // const { user } = userCredential
           setIsLoading(false)
           navigation.navigate('account')
@@ -136,7 +134,7 @@ export default function RegisterForm({ toastRef }) {
         buttonStyle={styles.btnRegister}
         onPress={onSubmit}
       />
-      <Loading isVisible={isLoading} text="Creando cuenta" />
+      <LoadingModal isVisible={isLoading} text="Creando cuenta" />
     </View>
   )
 }

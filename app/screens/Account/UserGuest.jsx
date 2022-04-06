@@ -1,5 +1,5 @@
 import { StyleSheet, ScrollView, Image, View, Text } from 'react-native'
-import React from 'react'
+
 import { Button } from 'react-native-elements'
 import { useNavigation } from '@react-navigation/native'
 

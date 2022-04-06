@@ -1,5 +1,5 @@
 import { StyleSheet, ScrollView, Image, View, Text } from 'react-native'
-import React, { useRef } from 'react'
+import  { useRef } from 'react'
 import { Divider } from 'react-native-elements'
 import { useNavigation } from '@react-navigation/native'
 import Toast from 'react-native-easy-toast'

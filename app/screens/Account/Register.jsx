@@ -1,5 +1,5 @@
 import { StyleSheet, View, Image } from 'react-native'
-import React, { useRef } from 'react'
+import  { useRef } from 'react'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import Toast from 'react-native-easy-toast'
 import RegisterForm from '../../components/Account/RegisterForm'

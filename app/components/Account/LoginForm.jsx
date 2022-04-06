@@ -1,12 +1,11 @@
-/* eslint-disable react/prop-types */
 import { StyleSheet, View } from 'react-native'
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { Input, Icon, Button } from 'react-native-elements'
 import { isEmpty } from 'lodash'
 import { useNavigation } from '@react-navigation/native'
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
 import { validateEmail } from '../../utils/validations'
-import Loading from '../Loading'
+import { LoadingModal } from '..'
 
 const styles = StyleSheet.create({
   formContainer: {
@@ -62,7 +61,7 @@ export default function LoginForm({ toastRef }) {
     } else {
       setIsLoading(true)
       signInWithEmailAndPassword(auth, email, password)
-        .then((user) => {
+        .then(() => {
           setIsLoading(false)
           navigation.navigate('account')
         })
@@ -108,7 +107,7 @@ export default function LoginForm({ toastRef }) {
         buttonStyle={styles.btnLogin}
         onPress={onSubmit}
       />
-      <Loading isVisible={isLoading} text="Iniciando sesión" />
+      <LoadingModal isVisible={isLoading} text="Iniciando sesión" />
     </View>
   )
 }
