@@ -1,32 +1,47 @@
 import { View } from 'react-native'
 import { useState } from 'react'
 import { Input, Icon, Button } from 'react-native-elements'
-import { size, isEmpty } from 'lodash'
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth'
+import { useFormik } from 'formik'
 import { useNavigation } from '@react-navigation/native'
-import { validateEmail } from '../../../utils/validations'
-import { LoadingModal } from '../..'
+import Toast from 'react-native-toast-message'
 import { screen } from '../../../navigation/screenName'
 import { styles } from './RegisterForm.styles'
+import { initialValues, validationSchema } from './RegisterForm.data'
 
-function defaultFormValue() {
-  return {
-    email: '',
-    password: '',
-    repeatPassword: '',
-  }
-}
-
-export function RegisterForm({ toastRef }) {
+export function RegisterForm() {
   const navigation = useNavigation()
   const auth = getAuth()
-  const [isLoading, setIsLoading] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
   const [showRepeatPassword, setShowRepeatPassword] = useState(false)
-  const [formData, setFormData] = useState(defaultFormValue())
+  const formik = useFormik({
+    initialValues: initialValues(),
+    validationSchema: validationSchema(),
+    validateOnChange: false,
+    onSubmit: (formValue) => onSubmit(formValue),
+  })
 
-  const onSubmit = () => {
-    const { email, password, repeatPassword } = formData
+  const onSubmit = async (formValue) => {
+    try {
+      await createUserWithEmailAndPassword(
+        auth,
+        formValue.email,
+        formValue.password
+      )
+      navigation.navigate(screen.account.account)
+    } catch (error) {
+      Toast.show({
+        type: 'error',
+        position: 'bottom',
+        text1: 'Error al registrarse, intentelo mas tarde',
+      })
+    }
+  }
+
+  const onShowHidePassword = () => setShowPassword((prevValue) => !prevValue)
+  const onShowHideRepeatPassword = () =>
+    setShowRepeatPassword((prevValue) => !prevValue)
+  /*  const { email, password, repeatPassword } = formData
     if (isEmpty(email) || isEmpty(password) || isEmpty(repeatPassword)) {
       toastRef.current.show('Todos los campos son obligatorios')
     } else if (!validateEmail(email)) {
@@ -40,7 +55,7 @@ export function RegisterForm({ toastRef }) {
     } else {
       setIsLoading(true)
       createUserWithEmailAndPassword(auth, email, password)
-        .then((/* userCredential */) => {
+        .then(( userCredential ) => {
           // const { user } = userCredential
           setIsLoading(false)
           navigation.navigate(screen.account.account)
@@ -53,22 +68,15 @@ export function RegisterForm({ toastRef }) {
             `El email ya está en uso, pruebe con otro. Error code: ${errorCode}`
           )
         })
-    }
-  }
-
-  const onChange = (e, type) => {
-    e.preventDefault()
-    setFormData((prevValue) => {
-      return { ...prevValue, [type]: e.nativeEvent.text }
-    })
-  }
+    } */
 
   return (
     <View style={styles.formContainer}>
       <Input
         placeholder="Correo electrónico"
         containerStyle={styles.inputForm}
-        onChange={(e) => onChange(e, 'email')}
+        onChangeText={(text) => formik.setFieldValue('email', text)}
+        errorMessage={formik.errors.email}
         rightIcon={
           <Icon
             type="material-community"
@@ -82,13 +90,14 @@ export function RegisterForm({ toastRef }) {
         secureTextEntry={!showPassword}
         placeholder="Contraseña"
         containerStyle={styles.inputForm}
-        onChange={(e) => onChange(e, 'password')}
+        onChangeText={(text) => formik.setFieldValue('password', text)}
+        errorMessage={formik.errors.password}
         rightIcon={
           <Icon
             type="material-community"
             name={showPassword ? 'eye-off-outline' : 'eye-outline'}
             iconStyle={styles.iconRight}
-            onPress={() => setShowPassword((prevValue) => !prevValue)}
+            onPress={onShowHidePassword}
           />
         }
       />
@@ -97,13 +106,14 @@ export function RegisterForm({ toastRef }) {
         secureTextEntry={!showRepeatPassword}
         placeholder="Repetir contraseña"
         containerStyle={styles.inputForm}
-        onChange={(e) => onChange(e, 'repeatPassword')}
+        onChangeText={(text) => formik.setFieldValue('repeatPassword', text)}
+        errorMessage={formik.errors.repeatPassword}
         rightIcon={
           <Icon
             type="material-community"
             name={showRepeatPassword ? 'eye-off-outline' : 'eye-outline'}
             iconStyle={styles.iconRight}
-            onPress={() => setShowRepeatPassword((prevValue) => !prevValue)}
+            onPress={onShowHideRepeatPassword}
           />
         }
       />
@@ -111,9 +121,9 @@ export function RegisterForm({ toastRef }) {
         title="Unirse"
         containerStyle={styles.btnContainerRegister}
         buttonStyle={styles.btnRegister}
-        onPress={onSubmit}
+        onPress={formik.handleSubmit}
+        loading={formik.isSubmitting}
       />
-      <LoadingModal isVisible={isLoading} text="Creando cuenta" />
     </View>
   )
 }
