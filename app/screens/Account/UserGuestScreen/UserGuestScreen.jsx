@@ -3,6 +3,7 @@ import { ScrollView, Image, View, Text } from 'react-native'
 import { Button } from 'react-native-elements'
 import { useNavigation } from '@react-navigation/native'
 import { styles } from './UserGuestScreen.styles'
+import { screen } from '../../../navigation/screenName'
 
 const logo = require('../../../../assets/img/user-guest.jpg')
 
@@ -22,7 +23,7 @@ export function UserGuestScreen() {
           buttonStyle={styles.btnStyle}
           containerStyle={styles.btnContainer}
           title="Ver tu perfil"
-          onPress={() => navigation.navigate('login')}
+          onPress={() => navigation.navigate(screen.account.login)}
         />
       </View>
     </ScrollView>

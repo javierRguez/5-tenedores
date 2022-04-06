@@ -1,34 +1,13 @@
-import { StyleSheet, View } from 'react-native'
+import { View } from 'react-native'
 import { useState } from 'react'
 import { Input, Icon, Button } from 'react-native-elements'
 import { size, isEmpty } from 'lodash'
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth'
 import { useNavigation } from '@react-navigation/native'
-import { validateEmail } from '../../utils/validations'
-import { LoadingModal } from '..'
-
-const styles = StyleSheet.create({
-  formContainer: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 30,
-  },
-  inputForm: {
-    width: '100%',
-    marginTop: 20,
-  },
-  btnContainerRegister: {
-    marginTop: 20,
-    width: '95%',
-  },
-  btnRegister: {
-    backgroundColor: '#00a680',
-  },
-  iconRight: {
-    color: '#c1c1c1',
-  },
-})
+import { validateEmail } from '../../../utils/validations'
+import { LoadingModal } from '../..'
+import { screen } from '../../../navigation/screenName'
+import { styles } from './RegisterForm.styles'
 
 function defaultFormValue() {
   return {
@@ -38,7 +17,7 @@ function defaultFormValue() {
   }
 }
 
-export default function RegisterForm({ toastRef }) {
+export function RegisterForm({ toastRef }) {
   const navigation = useNavigation()
   const auth = getAuth()
   const [isLoading, setIsLoading] = useState(false)
@@ -64,7 +43,7 @@ export default function RegisterForm({ toastRef }) {
         .then((/* userCredential */) => {
           // const { user } = userCredential
           setIsLoading(false)
-          navigation.navigate('account')
+          navigation.navigate(screen.account.account)
         })
         .catch((error) => {
           setIsLoading(false)

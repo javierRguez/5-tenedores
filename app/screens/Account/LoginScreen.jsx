@@ -3,7 +3,8 @@ import { useRef } from 'react'
 import { Divider } from 'react-native-elements'
 import { useNavigation } from '@react-navigation/native'
 import Toast from 'react-native-easy-toast'
-import LoginForm from '../../components/Account/LoginForm'
+import { LoginForm } from '../../components/Auth'
+import { screen } from '../../navigation/screenName'
 
 const logo = require('../../../assets/img/5-tenedores-letras-icono-logo.png')
 
@@ -54,7 +55,7 @@ function CreateAccount() {
       ¿Aún no tienes una cuenta?{' '}
       <Text
         style={styles.btnRegister}
-        onPress={() => navigation.navigate('register')}
+        onPress={() => navigation.navigate(screen.account.register)}
       >
         Regístrate
       </Text>

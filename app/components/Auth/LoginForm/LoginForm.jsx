@@ -1,34 +1,13 @@
-import { StyleSheet, View } from 'react-native'
+import { View } from 'react-native'
 import { useState } from 'react'
 import { Input, Icon, Button } from 'react-native-elements'
 import { isEmpty } from 'lodash'
 import { useNavigation } from '@react-navigation/native'
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
-import { validateEmail } from '../../utils/validations'
-import { LoadingModal } from '..'
-
-const styles = StyleSheet.create({
-  formContainer: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 30,
-  },
-  inputForm: {
-    width: '100%',
-    marginTop: 20,
-  },
-  btnContainerLogin: {
-    marginTop: 20,
-    width: '95%',
-  },
-  btnLogin: {
-    backgroundColor: '#00a680',
-  },
-  iconRight: {
-    color: '#c1c1c1',
-  },
-})
+import { validateEmail } from '../../../utils/validations'
+import { LoadingModal } from '../..'
+import { screen } from '../../../navigation/screenName'
+import { styles } from './LoginForm.styles'
 
 function defaultFormValue() {
   return {
@@ -38,7 +17,7 @@ function defaultFormValue() {
   }
 }
 
-export default function LoginForm({ toastRef }) {
+export function LoginForm({ toastRef }) {
   const [showPassword, setShowPassword] = useState(false)
   const [formData, setFormData] = useState(defaultFormValue())
   const [isLoading, setIsLoading] = useState(false)
@@ -63,7 +42,7 @@ export default function LoginForm({ toastRef }) {
       signInWithEmailAndPassword(auth, email, password)
         .then(() => {
           setIsLoading(false)
-          navigation.navigate('account')
+          navigation.navigate(screen.account.account)
         })
         .catch((error) => {
           setIsLoading(false)

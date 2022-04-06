@@ -2,7 +2,7 @@ import { StyleSheet, View, Image } from 'react-native'
 import { useRef } from 'react'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import Toast from 'react-native-easy-toast'
-import RegisterForm from '../../components/Account/RegisterForm'
+import { RegisterForm } from '../../components/Auth'
 
 const logo = require('../../../assets/img/5-tenedores-letras-icono-logo.png')
 
