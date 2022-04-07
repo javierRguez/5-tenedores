@@ -1,24 +1,24 @@
 import { StyleSheet } from 'react-native'
 
 export const styles = StyleSheet.create({
-  formContainer: {
+  content: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: 30,
   },
-  inputForm: {
+  input: {
     width: '100%',
     marginTop: 20,
   },
-  btnContainerRegister: {
+  icon: {
+    color: '#c1c1c1',
+  },
+  btnContainer: {
     marginTop: 20,
     width: '95%',
   },
-  btnRegister: {
+  btn: {
     backgroundColor: '#00a680',
-  },
-  iconRight: {
-    color: '#c1c1c1',
   },
 })

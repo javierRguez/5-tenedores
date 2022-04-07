@@ -2,23 +2,16 @@ import { StyleSheet } from 'react-native'
 
 export const styles = StyleSheet.create({
   content: {
-    flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 30,
+    paddingVertical: 10,
   },
   input: {
-    width: '100%',
-    marginTop: 20,
+    marginBottom: 20,
   },
   btnContainer: {
-    marginTop: 20,
     width: '95%',
   },
   btn: {
     backgroundColor: '#00a680',
-  },
-  icon: {
-    color: '#c1c1c1',
   },
 })

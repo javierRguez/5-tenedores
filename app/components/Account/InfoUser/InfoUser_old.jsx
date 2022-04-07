@@ -1,38 +1,17 @@
-import { StyleSheet, View, Text } from 'react-native'
-
+import { View, Text } from 'react-native'
 import { getAuth, updateProfile } from 'firebase/auth'
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage'
 import { Avatar } from 'react-native-elements'
 import * as MediaLibrary from 'expo-media-library'
 import * as ImagePicker from 'expo-image-picker'
+import { styles } from './InfoUser.styles'
 
-const styles = StyleSheet.create({
-  userInfoAvatar: { marginRight: 20 },
-  viewUserInfo: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    flexDirection: 'row',
-    backgroundColor: '#f2f2f2',
-    paddingTop: 20,
-    paddingBottom: 30,
-  },
-  displayName: {
-    fontWeight: 'bold',
-    paddingBottom: 5,
-  },
-})
+const defaultAvatar = require('../../../../assets/img/avatar-default.jpg')
 
-const defaultAvatar = require('../../../assets/img/avatar-default.jpg')
-
-export default function InfoUser({
-  userInfo,
-  toastRef,
-  setLoadingText,
-  setIsLoading,
-}) {
+export function InfoUser({ toastRef, setLoadingText, setIsLoading }) {
   const auth = getAuth()
   const storage = getStorage()
-  const { uid, photoURL, email, displayName } = userInfo
+  const { uid, photoURL, email, displayName } = auth.currentUser
 
   const uploadImage = async (uri) => {
     setLoadingText('Actualizando Avatar...')
@@ -88,15 +67,16 @@ export default function InfoUser({
   }
 
   return (
-    <View style={styles.viewUserInfo}>
+    <View style={styles.content}>
       <Avatar
         showEditButton
         rounded
         size="large"
-        containerStyle={styles.userInfoAvatar}
+        containerStyle={styles.avatar}
+        icon={{ type: 'material', name: 'person' }}
         source={photoURL ? { uri: photoURL } : defaultAvatar}
       >
-        <Avatar.Accessory size={28} onPress={() => changeAvatar()} />
+        <Avatar.Accessory size={24} onPress={changeAvatar} />
       </Avatar>
       <View>
         <Text style={styles.displayName}>{displayName || 'Anónimo'}</Text>

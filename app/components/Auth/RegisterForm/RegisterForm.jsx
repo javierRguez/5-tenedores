@@ -71,32 +71,28 @@ export function RegisterForm() {
     } */
 
   return (
-    <View style={styles.formContainer}>
+    <View style={styles.content}>
       <Input
         placeholder="Correo electrónico"
-        containerStyle={styles.inputForm}
+        containerStyle={styles.input}
         onChangeText={(text) => formik.setFieldValue('email', text)}
         errorMessage={formik.errors.email}
         rightIcon={
-          <Icon
-            type="material-community"
-            name="at"
-            iconStyle={styles.iconRight}
-          />
+          <Icon type="material-community" name="at" iconStyle={styles.icon} />
         }
       />
       <Input
         password
         secureTextEntry={!showPassword}
         placeholder="Contraseña"
-        containerStyle={styles.inputForm}
+        containerStyle={styles.input}
         onChangeText={(text) => formik.setFieldValue('password', text)}
         errorMessage={formik.errors.password}
         rightIcon={
           <Icon
             type="material-community"
             name={showPassword ? 'eye-off-outline' : 'eye-outline'}
-            iconStyle={styles.iconRight}
+            iconStyle={styles.icon}
             onPress={onShowHidePassword}
           />
         }
@@ -105,22 +101,22 @@ export function RegisterForm() {
         password
         secureTextEntry={!showRepeatPassword}
         placeholder="Repetir contraseña"
-        containerStyle={styles.inputForm}
+        containerStyle={styles.input}
         onChangeText={(text) => formik.setFieldValue('repeatPassword', text)}
         errorMessage={formik.errors.repeatPassword}
         rightIcon={
           <Icon
             type="material-community"
             name={showRepeatPassword ? 'eye-off-outline' : 'eye-outline'}
-            iconStyle={styles.iconRight}
+            iconStyle={styles.icon}
             onPress={onShowHideRepeatPassword}
           />
         }
       />
       <Button
         title="Unirse"
-        containerStyle={styles.btnContainerRegister}
-        buttonStyle={styles.btnRegister}
+        containerStyle={styles.btnContainer}
+        buttonStyle={styles.btn}
         onPress={formik.handleSubmit}
         loading={formik.isSubmitting}
       />

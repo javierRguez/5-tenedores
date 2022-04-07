@@ -1,11 +1,11 @@
 import { StyleSheet } from 'react-native'
 
 export const styles = StyleSheet.create({
-  viewBody: {
-    marginLeft: 30,
-    marginRight: 30,
+  content: {
+    marginHorizontal: 30,
   },
   image: {
+    resizeMode: 'contain',
     height: 300,
     width: '100%',
     marginBottom: 40,
@@ -20,14 +20,7 @@ export const styles = StyleSheet.create({
     textAlign: 'center',
     marginBottom: 20,
   },
-  viewBtn: {
-    flex: 1,
-    alignItems: 'center',
-  },
   btnStyle: {
     backgroundColor: '#00a680',
-  },
-  btnContainer: {
-    width: '70%',
   },
 })

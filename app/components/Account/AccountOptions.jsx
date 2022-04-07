@@ -1,17 +1,11 @@
 import { useState } from 'react'
-import { StyleSheet, View, Text } from 'react-native'
+import { View } from 'react-native'
 import { ListItem, Icon } from 'react-native-elements'
 import { map } from 'lodash'
-import Modal from '../Modal'
-import ChangeDisplayNameForm from './ChangeDisplayNameForm'
-import ChangeEmailForm from './ChangeEmailForm'
-
-const styles = StyleSheet.create({
-  menuItem: {
-    borderBottomWidth: 1,
-    borderBottomColor: '#e3e3e3',
-  },
-})
+import { Modal } from '../Shared'
+import { ChangeDisplayNameForm } from './ChangeDisplayNameForm'
+import { ChangeEmailForm } from './ChangeEmailForm'
+import { ChangePasswordForm } from './ChangePasswordForm'
 
 function generateOptions(selectedComponent) {
   return [
@@ -42,39 +36,31 @@ function generateOptions(selectedComponent) {
   ]
 }
 
-export default function AccountOptions({
-  toastRef,
-  userInfo,
-  setReloadUserInfo,
-}) {
+export function AccountOptions({ onReload }) {
   const [showModal, setShowModal] = useState(false)
   const [renderComponent, setRenderComponent] = useState(null)
+
+  const onCloseOpenModal = () => setShowModal(false)
+
   const selectedComponent = (key) => {
     switch (key) {
       case 'displayName':
         setRenderComponent(
           <ChangeDisplayNameForm
-            displayName={userInfo.displayName}
-            setShowModal={setShowModal}
-            toastRef={toastRef}
-            setReloadUserInfo={setReloadUserInfo}
+            onClose={onCloseOpenModal}
+            onReload={onReload}
           />
         )
         setShowModal(true)
         break
       case 'email':
         setRenderComponent(
-          <ChangeEmailForm
-            email={userInfo.email}
-            setShowModal={setShowModal}
-            toastRef={toastRef}
-            setReloadUserInfo={setReloadUserInfo}
-          />
+          <ChangeEmailForm onClose={onCloseOpenModal} onReload={onReload} />
         )
         setShowModal(true)
         break
       case 'password':
-        setRenderComponent(<Text>Cambiando contraseña</Text>)
+        setRenderComponent(<ChangePasswordForm onClose={onCloseOpenModal} />)
         setShowModal(true)
         break
 
@@ -85,14 +71,11 @@ export default function AccountOptions({
     }
   }
   const menuOptions = generateOptions(selectedComponent)
+
   return (
     <View>
       {map(menuOptions, (menu, index) => (
-        <ListItem
-          key={index}
-          containerStyle={styles.menuItem}
-          onPress={menu.onPress}
-        >
+        <ListItem key={index} bottomDivider onPress={menu.onPress}>
           <Icon
             type={menu.iconType}
             name={menu.iconNameLeft}
@@ -105,7 +88,7 @@ export default function AccountOptions({
         </ListItem>
       ))}
       {renderComponent && (
-        <Modal isVisible={showModal} setIsVisible={setShowModal}>
+        <Modal isVisible={showModal} close={onCloseOpenModal}>
           {renderComponent}
         </Modal>
       )}

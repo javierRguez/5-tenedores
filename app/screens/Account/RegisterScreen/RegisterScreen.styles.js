@@ -1,13 +1,13 @@
 import { StyleSheet } from 'react-native'
 
 export const styles = StyleSheet.create({
-  logo: {
+  image: {
+    resizeMode: 'contain',
     width: '100%',
-    marginTop: 20,
     height: 150,
+    marginTop: 20,
   },
-  viewForm: {
-    marginRight: 40,
-    marginLeft: 40,
+  content: {
+    marginHorizontal: 40,
   },
 })

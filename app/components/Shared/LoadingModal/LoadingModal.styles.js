@@ -5,11 +5,9 @@ export const styles = StyleSheet.create({
     height: 100,
     width: 200,
     backgroundColor: '#fff',
-    margin: 0,
-    padding: 10,
-    borderRadius: 10,
     borderColor: '#00a680',
     borderWidth: 2,
+    borderRadius: 10,
   },
   view: {
     flex: 1,
